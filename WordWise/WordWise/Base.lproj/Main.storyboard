@@ -79,6 +79,7 @@
                     <navigationItem key="navigationItem" id="7gs-Nd-fRN"/>
                     <connections>
                         <outlet property="searchBar" destination="f0H-a6-DQC" id="vHW-oa-qsc"/>
+                        <outlet property="searchButton" destination="fHC-rX-T5d" id="614-JA-vGi"/>
                         <outlet property="tableView" destination="3oB-z7-9Ub" id="eWQ-AP-Zln"/>
                     </connections>
                 </viewController>

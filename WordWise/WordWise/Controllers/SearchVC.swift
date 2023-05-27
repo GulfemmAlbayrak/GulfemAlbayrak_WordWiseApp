@@ -12,14 +12,16 @@ class SearchVC: UIViewController {
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var searchButton: UIButton!
     
-//    let service: WordServiceProtocol = WordService()
-//    var words: [WordElement] = []
     var words: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
+        
+//        searchButton.addTarget(self, action: #selector(searchButtonTapped), for: .touchUpInside)
+//        searchBar.inputAccessoryView = searchButton
     }
     
     private func configureTableView() {
@@ -30,18 +32,23 @@ class SearchVC: UIViewController {
     
     @IBAction func searchButtonTapped(_ sender: Any) {
         guard let searchText = searchBar.text else { return }
-                words.append(searchText)
-                tableView.reloadData()
-                
-                let wordDetailVC = storyboard?.instantiateViewController(withIdentifier: "WordDetailVC") as! WordDetailVC
+        
+        if !words.contains(searchText) {
+            words.insert(searchText, at: 0)
+            tableView.reloadData()
+        }
+        
+        searchBar.text = ""
+        
+        let wordDetailVC = storyboard?.instantiateViewController(withIdentifier: "WordDetailVC") as! WordDetailVC
         wordDetailVC.word = searchText.lowercased()
-                navigationController?.pushViewController(wordDetailVC, animated: true)
-            }
+        navigationController?.pushViewController(wordDetailVC, animated: true)
+    }
 }
     
     extension SearchVC: UITableViewDelegate, UITableViewDataSource  {
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return words.count
+            return min(5, words.count)
         }
         
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -54,10 +61,10 @@ class SearchVC: UIViewController {
         
         
         func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-            //            let wordDetailVC = storyboard?.instantiateViewController(withIdentifier: "WordDetailVC") as! WordDetailVC
-            //            let selectedWord = self.words[indexPath.row]
-            //            wordDetailVC.selectedWord = selectedWord
-            //            navigationController?.pushViewController(wordDetailVC, animated: true)
+            let wordDetailVC = storyboard?.instantiateViewController(withIdentifier: "WordDetailVC") as! WordDetailVC
+            let selectedWord = self.words[indexPath.row]
+            wordDetailVC.word = selectedWord
+            navigationController?.pushViewController(wordDetailVC, animated: true)
             
         }
     }
