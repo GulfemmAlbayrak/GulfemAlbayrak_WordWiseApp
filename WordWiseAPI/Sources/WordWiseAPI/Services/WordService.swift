@@ -26,12 +26,11 @@ public class WordService: WordServiceProtocol {
                 do {
                     let response = try decoder.decode(WordResponse.self, from: data)
                     completion(.success(response.results))
-                    print("Success")
                 } catch {
-                    print("JSON decode error: \(error)")
+                    completion(.failure(error))
                 }
             case .failure(let error):
-                print("API request error: \(error.localizedDescription)")
+                completion(.failure(error))
             }
         }
     }

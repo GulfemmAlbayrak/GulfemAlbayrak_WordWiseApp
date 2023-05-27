@@ -20,6 +20,8 @@
 		D77A37242A211C92009CDFED /* RecentWordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D77A37222A211C92009CDFED /* RecentWordCell.xib */; };
 		D77A37262A2158EE009CDFED /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77A37252A2158EE009CDFED /* File.swift */; };
 		D77A37292A216ABB009CDFED /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77A37282A216ABB009CDFED /* SearchViewModel.swift */; };
+		D77A37312A22264D009CDFED /* WordDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77A372F2A22264D009CDFED /* WordDetailCell.swift */; };
+		D77A37322A22264D009CDFED /* WordDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D77A37302A22264D009CDFED /* WordDetailCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +40,8 @@
 		D77A37222A211C92009CDFED /* RecentWordCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecentWordCell.xib; sourceTree = "<group>"; };
 		D77A37252A2158EE009CDFED /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		D77A37282A216ABB009CDFED /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
+		D77A372F2A22264D009CDFED /* WordDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordDetailCell.swift; sourceTree = "<group>"; };
+		D77A37302A22264D009CDFED /* WordDetailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WordDetailCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +104,8 @@
 			children = (
 				D77A37212A211C92009CDFED /* RecentWordCell.swift */,
 				D77A37222A211C92009CDFED /* RecentWordCell.xib */,
+				D77A372F2A22264D009CDFED /* WordDetailCell.swift */,
+				D77A37302A22264D009CDFED /* WordDetailCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -182,6 +188,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D77A37322A22264D009CDFED /* WordDetailCell.xib in Resources */,
 				D77A37242A211C92009CDFED /* RecentWordCell.xib in Resources */,
 				D77A370F2A20BC6A009CDFED /* LaunchScreen.storyboard in Resources */,
 				D77A370C2A20BC6A009CDFED /* Assets.xcassets in Resources */,
@@ -204,6 +211,7 @@
 				D77A370A2A20BC69009CDFED /* WordWise.xcdatamodeld in Sources */,
 				D77A37002A20BC69009CDFED /* AppDelegate.swift in Sources */,
 				D77A37022A20BC69009CDFED /* SceneDelegate.swift in Sources */,
+				D77A37312A22264D009CDFED /* WordDetailCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

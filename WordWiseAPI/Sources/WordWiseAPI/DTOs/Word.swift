@@ -12,7 +12,7 @@ public struct WordElement: Decodable {
     public let word: String?
     public let phonetic: String?
     public let phonetics: [Phonetic]?
-    public let meanings: [String: [Meaning]]?
+    public let meanings: [Meaning]?
 }
 
 // MARK: - Meaning

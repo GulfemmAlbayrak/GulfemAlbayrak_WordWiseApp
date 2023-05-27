@@ -19,9 +19,7 @@ class SearchVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
-        
-//        searchButton.addTarget(self, action: #selector(searchButtonTapped), for: .touchUpInside)
-//        searchBar.inputAccessoryView = searchButton
+
     }
     
     private func configureTableView() {
@@ -74,3 +72,6 @@ class SearchVC: UIViewController {
     
 
 
+
+//        searchButton.addTarget(self, action: #selector(searchButtonTapped), for: .touchUpInside)
+//        searchBar.inputAccessoryView = searchButton
