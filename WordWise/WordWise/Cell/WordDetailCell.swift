@@ -25,10 +25,10 @@ class WordDetailCell: UITableViewCell {
         // Configure the view for the selected state
     }
     func configure(meaning: Meaning) {
-        partOfSpeechLbl.text = meaning.partOfSpeech
+        partOfSpeechLbl.text = meaning.partOfSpeech?.capitalized
         deffinationLbl.text = meaning.definitions?.first?.definition
         exampleTitle.isHidden = meaning.definitions?.first?.example == nil
-        exampleTitle.text = "EXAMPLE"
+        exampleTitle.text = "Example"
         exampleLbl.text = meaning.definitions?.first?.example
     }
     

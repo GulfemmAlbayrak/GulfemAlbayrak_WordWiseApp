@@ -21,18 +21,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="177" height="49"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2HW-lL-Mht">
-                                <rect key="frame" x="16" y="16" width="145" height="17"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="12" y="8" width="153" height="33"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="2HW-lL-Mht" secondAttribute="trailing" constant="16" id="D1V-u4-DHp"/>
-                            <constraint firstAttribute="bottom" secondItem="2HW-lL-Mht" secondAttribute="bottom" constant="16" id="U0t-Hm-VvJ"/>
-                            <constraint firstItem="2HW-lL-Mht" firstAttribute="top" secondItem="9v9-KV-F3x" secondAttribute="top" constant="16" id="Xz2-YY-geR"/>
-                            <constraint firstItem="2HW-lL-Mht" firstAttribute="leading" secondItem="9v9-KV-F3x" secondAttribute="leading" constant="16" id="zKH-LC-0Qc"/>
+                            <constraint firstAttribute="trailing" secondItem="2HW-lL-Mht" secondAttribute="trailing" constant="12" id="D1V-u4-DHp"/>
+                            <constraint firstAttribute="bottom" secondItem="2HW-lL-Mht" secondAttribute="bottom" constant="8" id="U0t-Hm-VvJ"/>
+                            <constraint firstItem="2HW-lL-Mht" firstAttribute="top" secondItem="9v9-KV-F3x" secondAttribute="top" constant="8" id="Xz2-YY-geR"/>
+                            <constraint firstItem="2HW-lL-Mht" firstAttribute="leading" secondItem="9v9-KV-F3x" secondAttribute="leading" constant="12" id="zKH-LC-0Qc"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -47,6 +47,7 @@
             <size key="customSize" width="177" height="49"/>
             <connections>
                 <outlet property="synonymLabel" destination="2HW-lL-Mht" id="sna-BK-nn8"/>
+                <outlet property="view" destination="9v9-KV-F3x" id="ELI-44-TnA"/>
             </connections>
             <point key="canvasLocation" x="180.91603053435114" y="-13.028169014084508"/>
         </collectionViewCell>

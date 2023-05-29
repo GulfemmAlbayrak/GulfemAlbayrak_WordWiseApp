@@ -22,6 +22,6 @@ class RecentWordCell: UITableViewCell {
         // Configure the view for the selected state
     }
     func configure(word: String) {
-        recentWordLbl.text = word
+        recentWordLbl.text = word.lowercased().capitalized
     }
 }

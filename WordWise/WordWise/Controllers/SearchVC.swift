@@ -18,7 +18,6 @@ class SearchVC: UIViewController, LoadingShowable {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
-       // searchBar.inputAccessoryView = searchButton
         LoadingView.shared.configure()
     }
     
@@ -29,16 +28,24 @@ class SearchVC: UIViewController, LoadingShowable {
     }
     
     private func fetchWordData(for word: String) {
-        viewModel.fetchWordData(word: word) { [weak self] result in
+        viewModel.fetchWordDataAndSynonyms(word: word) { [weak self] result in
             switch result {
             case .success(let wordElement):
                 DispatchQueue.main.async {
                     let wordDetailVC = self?.storyboard?.instantiateViewController(withIdentifier: "WordDetailVC") as! WordDetailVC
                     wordDetailVC.wordElement = wordElement
                     wordDetailVC.synonyms = self?.viewModel.synonyms ?? []
+                    //wordDetailVC.delegate = self
                     self?.navigationController?.pushViewController(wordDetailVC, animated: true)
-                }
+               }
             case .failure(let error):
+                let alertController = UIAlertController(title: "Uyarı", message: "Sonuç bulunamadı.", preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "Tamam", style: .default) { _ in
+                    self?.navigationController?.popViewController(animated: true)
+                    self?.hideLoading()
+                }
+                alertController.addAction(okAction)
+                self?.present(alertController, animated: true, completion: nil)
                 print("API request error: \(error.localizedDescription)")
             }
         }
@@ -46,7 +53,7 @@ class SearchVC: UIViewController, LoadingShowable {
     
     @IBAction func searchButtonTapped(_ sender: Any) {
         guard let searchText = searchBar.text else { return }
-        viewModel.addWord(searchText.lowercased())
+        viewModel.addWord(searchText)
         tableView.reloadData()
         searchBar.text = ""
         showLoading()
@@ -72,11 +79,3 @@ extension SearchVC: UITableViewDelegate, UITableViewDataSource  {
     }
 }
     
-
-    
-    
-
-
-
-//        searchButton.addTarget(self, action: #selector(searchButtonTapped), for: .touchUpInside)
-//

@@ -8,6 +8,7 @@
 import UIKit
 import WordWiseAPI
 
+
 class WordDetailVC: UIViewController, LoadingShowable {
     
     @IBOutlet weak var wordLbl: UILabel!
@@ -15,15 +16,15 @@ class WordDetailVC: UIViewController, LoadingShowable {
     @IBOutlet weak var wordTableView: UITableView!
     @IBOutlet weak var synonymCollectionView: UICollectionView!
     
-    var wordElement: WordElement?
     var viewModel: WordDetailViewModel = WordDetailViewModel()
+    var wordElement: WordElement?
     var synonyms: [SynWordElement] = []
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         hideLoading()
         if let word = wordElement?.word {
-            wordLbl.text = word.uppercased()
+            wordLbl.text = word.lowercased().capitalized
             configureTableView()
             configureCollectionView()
             if let wordElement = wordElement {
@@ -46,6 +47,7 @@ class WordDetailVC: UIViewController, LoadingShowable {
     private func configure(with wordElement: WordElement) {
         phoneticLbl.text = wordElement.phonetics?.first?.text
         viewModel.meanings = wordElement.meanings ?? []
+        viewModel.synonyms = synonyms // Set the synonyms in the view model
         wordTableView.reloadData()
     }
 
@@ -73,12 +75,12 @@ extension WordDetailVC: UITableViewDataSource {
 
 extension WordDetailVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return synonyms.count
+        return 5
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SynonymCell", for: indexPath) as! SynonymCell
-        let synonym = synonyms[indexPath.item]
+        let synonym = viewModel.synonyms[indexPath.item]
         cell.configure(synonym: synonym)
         return cell
     }
