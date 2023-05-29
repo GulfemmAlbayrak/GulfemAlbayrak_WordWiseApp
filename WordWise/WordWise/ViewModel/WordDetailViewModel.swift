@@ -1,23 +1,17 @@
-////
-////  SearchViewModel.swift
-////  WordWise
-////
-////  Created by Gülfem Albayrak on 27.05.2023.
-////
 //
+//  WordDetailViewModel.swift
+//  WordWise
+//
+//  Created by Gülfem Albayrak on 27.05.2023.
+//
+
 import Foundation
 import WordWiseAPI
 
-class SearchViewModel {
-    var words: [String] = []
+
+class WordDetailViewModel {
     var meanings: [Meaning] = []
     var synonyms: [SynWordElement] = []
-    
-    func addWord(_ word: String) {
-        if !words.contains(word) {
-            words.insert(word, at: 0)
-        }
-    }
     
     func fetchWordData(word: String, completion: @escaping (Result<WordElement, Error>) -> Void) {
         let wordService: WordServiceProtocol = WordService()

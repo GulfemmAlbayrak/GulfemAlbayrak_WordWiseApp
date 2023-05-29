@@ -31,8 +31,9 @@ public struct Definition: Decodable {
 public struct Phonetic: Decodable {
     public let text: String?
 }
-/*
- let wordDetailVC = self.storyboard?.instantiateViewController(withIdentifier: "WordDetailVC") as? WordDetailVC
- wordDetailVC?.word = self.words
-     self.navigationController?.pushViewController(wordDetailVC!, animated: true)
- */
+
+// MARK: - SynWordElement
+public struct SynWordElement: Decodable {
+    public let word: String
+    public let score: Int
+}

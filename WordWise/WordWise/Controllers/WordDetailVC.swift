@@ -8,62 +8,79 @@
 import UIKit
 import WordWiseAPI
 
-class WordDetailVC: UIViewController {
+class WordDetailVC: UIViewController, LoadingShowable {
     
     @IBOutlet weak var wordLbl: UILabel!
     @IBOutlet weak var phoneticLbl: UILabel!
     @IBOutlet weak var wordTableView: UITableView!
+    @IBOutlet weak var synonymCollectionView: UICollectionView!
     
-    var word: String?
-    let wordService: WordServiceProtocol = WordService()
-    var meanings: [Meaning] = []
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        wordLbl.text = word?.uppercased()
-        configureTableView()
-    }
+    var wordElement: WordElement?
+    var viewModel: WordDetailViewModel = WordDetailViewModel()
+    var synonyms: [SynWordElement] = []
+
     override func viewWillAppear(_ animated: Bool) {
-        if let word = word {
-            fetchWordData(word: word)
+        super.viewWillAppear(animated)
+        hideLoading()
+        if let word = wordElement?.word {
+            wordLbl.text = word.uppercased()
+            configureTableView()
+            configureCollectionView()
+            if let wordElement = wordElement {
+                configure(with: wordElement) // configure methodunu burada çağırıyoruz
+            }
+            updateUI(with: wordElement!)
         }
     }
+  
     private func configureTableView() {
-            wordTableView.dataSource = self
-            wordTableView.register(UINib(nibName: "WordDetailCell", bundle: nil), forCellReuseIdentifier: "WordDetailCell")
-        }
+        wordTableView.dataSource = self
+        wordTableView.register(UINib(nibName: "WordDetailCell", bundle: nil), forCellReuseIdentifier: "WordDetailCell")
+    }
     
-    private func fetchWordData(word: String) {
-            wordService.getWords(word: word) { [weak self] result in
-                switch result {
-                case .success(let wordElements):
-                    if let wordElement = wordElements.first {
-                        DispatchQueue.main.async {
-                            self?.updateUI(with: wordElement)
-                        }
-                    }
-                case .failure(let error):
-                    print("API request error: \(error.localizedDescription)")
-                }
-            }
-        }
-        
-        private func updateUI(with wordElement: WordElement) {
-            phoneticLbl.text = wordElement.phonetics?.first?.text
-            meanings = wordElement.meanings ?? []
-            wordTableView.reloadData()
-        }
+    private func configureCollectionView() {
+        synonymCollectionView.dataSource = self
+        synonymCollectionView.register(UINib(nibName: "SynonymCell", bundle: nil), forCellWithReuseIdentifier: "SynonymCell")
+    }
+    
+    private func configure(with wordElement: WordElement) {
+        phoneticLbl.text = wordElement.phonetics?.first?.text
+        viewModel.meanings = wordElement.meanings ?? []
+        wordTableView.reloadData()
     }
 
-    extension WordDetailVC: UITableViewDataSource {
-        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return meanings.count
-        }
         
-        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "WordDetailCell", for: indexPath) as! WordDetailCell
-            let meaning = meanings[indexPath.row]
-            cell.configure(meaning: meaning)
-            return cell
-        }
+    private func updateUI(with wordElement: WordElement) {
+        phoneticLbl.text = wordElement.phonetics?.first?.text
+        wordTableView.reloadData()
+        synonymCollectionView.reloadData()
     }
+
+}
+
+extension WordDetailVC: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewModel.meanings.count
+    }
+        
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "WordDetailCell", for: indexPath) as! WordDetailCell
+        let meaning = viewModel.meanings[indexPath.row]
+        cell.configure(meaning: meaning)
+        return cell
+    }
+}
+
+extension WordDetailVC: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return synonyms.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SynonymCell", for: indexPath) as! SynonymCell
+        let synonym = synonyms[indexPath.item]
+        cell.configure(synonym: synonym)
+        return cell
+    }
+}
+    

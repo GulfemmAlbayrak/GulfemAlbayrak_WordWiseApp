@@ -27,6 +27,8 @@ class WordDetailCell: UITableViewCell {
     func configure(meaning: Meaning) {
         partOfSpeechLbl.text = meaning.partOfSpeech
         deffinationLbl.text = meaning.definitions?.first?.definition
+        exampleTitle.isHidden = meaning.definitions?.first?.example == nil
+        exampleTitle.text = "EXAMPLE"
         exampleLbl.text = meaning.definitions?.first?.example
     }
     

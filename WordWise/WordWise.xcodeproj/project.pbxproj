@@ -22,6 +22,11 @@
 		D77A37292A216ABB009CDFED /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77A37282A216ABB009CDFED /* SearchViewModel.swift */; };
 		D77A37312A22264D009CDFED /* WordDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77A372F2A22264D009CDFED /* WordDetailCell.swift */; };
 		D77A37322A22264D009CDFED /* WordDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D77A37302A22264D009CDFED /* WordDetailCell.xib */; };
+		D77A37342A223515009CDFED /* WordDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77A37332A223515009CDFED /* WordDetailViewModel.swift */; };
+		D77A37372A234E3C009CDFED /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77A37362A234E3C009CDFED /* LoadingView.swift */; };
+		D77A37392A234E4B009CDFED /* LoadingShowable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77A37382A234E4B009CDFED /* LoadingShowable.swift */; };
+		D77A373C2A2352A9009CDFED /* SynonymCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77A373A2A2352A9009CDFED /* SynonymCell.swift */; };
+		D77A373D2A2352A9009CDFED /* SynonymCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D77A373B2A2352A9009CDFED /* SynonymCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +47,11 @@
 		D77A37282A216ABB009CDFED /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		D77A372F2A22264D009CDFED /* WordDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordDetailCell.swift; sourceTree = "<group>"; };
 		D77A37302A22264D009CDFED /* WordDetailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WordDetailCell.xib; sourceTree = "<group>"; };
+		D77A37332A223515009CDFED /* WordDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordDetailViewModel.swift; sourceTree = "<group>"; };
+		D77A37362A234E3C009CDFED /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		D77A37382A234E4B009CDFED /* LoadingShowable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingShowable.swift; sourceTree = "<group>"; };
+		D77A373A2A2352A9009CDFED /* SynonymCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynonymCell.swift; sourceTree = "<group>"; };
+		D77A373B2A2352A9009CDFED /* SynonymCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SynonymCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +87,7 @@
 		D77A36FE2A20BC69009CDFED /* WordWise */ = {
 			isa = PBXGroup;
 			children = (
+				D77A37352A234E2C009CDFED /* CustomView */,
 				D77A37272A216AAA009CDFED /* ViewModel */,
 				D77A371E2A20E343009CDFED /* Controllers */,
 				D77A371A2A20DDC2009CDFED /* Cell */,
@@ -106,6 +117,8 @@
 				D77A37222A211C92009CDFED /* RecentWordCell.xib */,
 				D77A372F2A22264D009CDFED /* WordDetailCell.swift */,
 				D77A37302A22264D009CDFED /* WordDetailCell.xib */,
+				D77A373A2A2352A9009CDFED /* SynonymCell.swift */,
+				D77A373B2A2352A9009CDFED /* SynonymCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -123,8 +136,18 @@
 			isa = PBXGroup;
 			children = (
 				D77A37282A216ABB009CDFED /* SearchViewModel.swift */,
+				D77A37332A223515009CDFED /* WordDetailViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		D77A37352A234E2C009CDFED /* CustomView */ = {
+			isa = PBXGroup;
+			children = (
+				D77A37362A234E3C009CDFED /* LoadingView.swift */,
+				D77A37382A234E4B009CDFED /* LoadingShowable.swift */,
+			);
+			path = CustomView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -193,6 +216,7 @@
 				D77A370F2A20BC6A009CDFED /* LaunchScreen.storyboard in Resources */,
 				D77A370C2A20BC6A009CDFED /* Assets.xcassets in Resources */,
 				D77A37072A20BC69009CDFED /* Main.storyboard in Resources */,
+				D77A373D2A2352A9009CDFED /* SynonymCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -205,7 +229,11 @@
 			files = (
 				D77A37232A211C92009CDFED /* RecentWordCell.swift in Sources */,
 				D77A37042A20BC69009CDFED /* SearchVC.swift in Sources */,
+				D77A373C2A2352A9009CDFED /* SynonymCell.swift in Sources */,
 				D77A37292A216ABB009CDFED /* SearchViewModel.swift in Sources */,
+				D77A37392A234E4B009CDFED /* LoadingShowable.swift in Sources */,
+				D77A37372A234E3C009CDFED /* LoadingView.swift in Sources */,
+				D77A37342A223515009CDFED /* WordDetailViewModel.swift in Sources */,
 				D77A37262A2158EE009CDFED /* File.swift in Sources */,
 				D77A37202A20E364009CDFED /* WordDetailVC.swift in Sources */,
 				D77A370A2A20BC69009CDFED /* WordWise.xcdatamodeld in Sources */,
