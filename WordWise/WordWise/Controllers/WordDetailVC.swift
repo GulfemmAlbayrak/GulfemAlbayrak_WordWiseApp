@@ -7,6 +7,7 @@
 
 import UIKit
 import WordWiseAPI
+import AVFoundation
 
 
 class WordDetailVC: UIViewController, LoadingShowable {
@@ -15,10 +16,12 @@ class WordDetailVC: UIViewController, LoadingShowable {
     @IBOutlet weak var phoneticLbl: UILabel!
     @IBOutlet weak var wordTableView: UITableView!
     @IBOutlet weak var synonymCollectionView: UICollectionView!
+    @IBOutlet weak var speakerButton: UIButton!
     
     var viewModel: WordDetailViewModel = WordDetailViewModel()
     var wordElement: WordElement?
     var synonyms: [SynWordElement] = []
+    var player: AVAudioPlayer!
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -31,6 +34,7 @@ class WordDetailVC: UIViewController, LoadingShowable {
                 configure(with: wordElement) // configure methodunu burada çağırıyoruz
             }
             updateUI(with: wordElement!)
+            toggleSpeakerButton()
         }
     }
   
@@ -47,7 +51,7 @@ class WordDetailVC: UIViewController, LoadingShowable {
     private func configure(with wordElement: WordElement) {
         phoneticLbl.text = wordElement.phonetics?.first?.text
         viewModel.meanings = wordElement.meanings ?? []
-        viewModel.synonyms = synonyms // Set the synonyms in the view model
+        viewModel.synonyms = synonyms
         wordTableView.reloadData()
     }
 
@@ -56,6 +60,54 @@ class WordDetailVC: UIViewController, LoadingShowable {
         phoneticLbl.text = wordElement.phonetics?.first?.text
         wordTableView.reloadData()
         synonymCollectionView.reloadData()
+    }
+    @IBAction func audioButton(_ sender: Any) {
+        guard let phonetics = wordElement?.phonetics, !phonetics.isEmpty,
+              let audioURLString = phonetics[0].audio, !audioURLString.isEmpty,
+              let audioURL = URL(string: audioURLString) else {
+            return
+        }
+        print("audioURLString: \(audioURLString)")
+        print("audioURL: \(audioURL)")
+        playAudioFromURL(audioURL)
+    }
+
+    private func playAudioFromURL(_ audioURL: URL) {
+        let session = URLSession.shared
+        let request = URLRequest(url: audioURL)
+        
+        let task = session.dataTask(with: request) { [weak self] (data, response, error) in
+            if let error = error {
+                print("Failed to play audio: \(error)")
+                return
+            }
+            
+            guard let data = data else {
+                print("Failed to get audio data")
+                return
+            }
+            
+            DispatchQueue.main.async {
+                do {
+                    self?.player = try AVAudioPlayer(data: data)
+                    self?.player.prepareToPlay()
+                    self?.player.play()
+                } catch {
+                    print("Failed to play audio: \(error)")
+                }
+            }
+        }
+        
+        task.resume()
+    }
+    
+    private func toggleSpeakerButton() {
+        if let phonetics = wordElement?.phonetics, !phonetics.isEmpty,
+           let audioURLString = phonetics[0].audio, !audioURLString.isEmpty {
+            speakerButton.isHidden = false
+        } else {
+            speakerButton.isHidden = true
+        }
     }
 
 }
@@ -75,7 +127,7 @@ extension WordDetailVC: UITableViewDataSource {
 
 extension WordDetailVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return min(5,viewModel.synonyms.count)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

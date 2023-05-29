@@ -30,10 +30,7 @@ public struct Definition: Decodable {
 // MARK: - Phonetic
 public struct Phonetic: Decodable {
     public let text: String?
+    public let audio: String?
 }
 
-// MARK: - SynWordElement
-public struct SynWordElement: Decodable {
-    public let word: String
-    public let score: Int
-}
+

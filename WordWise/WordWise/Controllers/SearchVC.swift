@@ -12,6 +12,7 @@ class SearchVC: UIViewController, LoadingShowable {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchButton: UIButton!
+    @IBOutlet weak var bottomConstraints: NSLayoutConstraint!
     
     var viewModel: SearchViewModel = SearchViewModel()
     
@@ -19,6 +20,31 @@ class SearchVC: UIViewController, LoadingShowable {
         super.viewDidLoad()
         configureTableView()
         LoadingView.shared.configure()
+        keyboardHiding()
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisplay), name:UIResponder.keyboardWillShowNotification , object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardHide), name:UIResponder.keyboardWillHideNotification , object: nil)
+    }
+    
+    @objc func keyboardWillDisplay(notification: Notification) {
+        if let keyboardFrame:NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            let keyboardHeight = keyboardRectangle.height
+            self.bottomConstraints.constant = keyboardHeight - 30
+        }
+    }
+    
+    @objc func keyboardHide(){
+        bottomConstraints.constant = 0
+    }
+    
+    private func keyboardHiding(){
+        let tap = UITapGestureRecognizer(target: self, action: #selector(keyboardRemove))
+        tap.cancelsTouchesInView = false
+        self.view.addGestureRecognizer(tap)
+    }
+    
+    @objc func keyboardRemove(){
+        view.endEditing(true)
     }
     
     private func configureTableView() {
@@ -76,6 +102,10 @@ extension SearchVC: UITableViewDelegate, UITableViewDataSource  {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedWord = viewModel.words[indexPath.row]
         fetchWordData(for: selectedWord)
+    }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
     }
 }
     

@@ -6,3 +6,8 @@
 //
 import Foundation
 
+// MARK: - SynWordElement
+public struct SynWordElement: Decodable {
+    public let word: String
+    public let score: Int
+}
