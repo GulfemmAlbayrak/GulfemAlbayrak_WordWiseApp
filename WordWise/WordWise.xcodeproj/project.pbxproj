@@ -27,6 +27,8 @@
 		D77A37392A234E4B009CDFED /* LoadingShowable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77A37382A234E4B009CDFED /* LoadingShowable.swift */; };
 		D77A373C2A2352A9009CDFED /* SynonymCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77A373A2A2352A9009CDFED /* SynonymCell.swift */; };
 		D77A373D2A2352A9009CDFED /* SynonymCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D77A373B2A2352A9009CDFED /* SynonymCell.xib */; };
+		D77A37442A260E7D009CDFED /* PartOfSpeechCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77A37422A260E7D009CDFED /* PartOfSpeechCell.swift */; };
+		D77A37452A260E7D009CDFED /* PartOfSpeechCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D77A37432A260E7D009CDFED /* PartOfSpeechCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +54,8 @@
 		D77A37382A234E4B009CDFED /* LoadingShowable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingShowable.swift; sourceTree = "<group>"; };
 		D77A373A2A2352A9009CDFED /* SynonymCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynonymCell.swift; sourceTree = "<group>"; };
 		D77A373B2A2352A9009CDFED /* SynonymCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SynonymCell.xib; sourceTree = "<group>"; };
+		D77A37422A260E7D009CDFED /* PartOfSpeechCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartOfSpeechCell.swift; sourceTree = "<group>"; };
+		D77A37432A260E7D009CDFED /* PartOfSpeechCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PartOfSpeechCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,12 +117,10 @@
 		D77A371A2A20DDC2009CDFED /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				D77A37212A211C92009CDFED /* RecentWordCell.swift */,
-				D77A37222A211C92009CDFED /* RecentWordCell.xib */,
-				D77A372F2A22264D009CDFED /* WordDetailCell.swift */,
-				D77A37302A22264D009CDFED /* WordDetailCell.xib */,
-				D77A373A2A2352A9009CDFED /* SynonymCell.swift */,
-				D77A373B2A2352A9009CDFED /* SynonymCell.xib */,
+				D77A37412A260E62009CDFED /* PartOfSpeechCell */,
+				D77A37402A260C4D009CDFED /* SynonymCell */,
+				D77A373F2A260C42009CDFED /* WordDetailCell */,
+				D77A373E2A260C36009CDFED /* RecentWordCell */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -148,6 +150,42 @@
 				D77A37382A234E4B009CDFED /* LoadingShowable.swift */,
 			);
 			path = CustomView;
+			sourceTree = "<group>";
+		};
+		D77A373E2A260C36009CDFED /* RecentWordCell */ = {
+			isa = PBXGroup;
+			children = (
+				D77A37212A211C92009CDFED /* RecentWordCell.swift */,
+				D77A37222A211C92009CDFED /* RecentWordCell.xib */,
+			);
+			path = RecentWordCell;
+			sourceTree = "<group>";
+		};
+		D77A373F2A260C42009CDFED /* WordDetailCell */ = {
+			isa = PBXGroup;
+			children = (
+				D77A372F2A22264D009CDFED /* WordDetailCell.swift */,
+				D77A37302A22264D009CDFED /* WordDetailCell.xib */,
+			);
+			path = WordDetailCell;
+			sourceTree = "<group>";
+		};
+		D77A37402A260C4D009CDFED /* SynonymCell */ = {
+			isa = PBXGroup;
+			children = (
+				D77A373B2A2352A9009CDFED /* SynonymCell.xib */,
+				D77A373A2A2352A9009CDFED /* SynonymCell.swift */,
+			);
+			path = SynonymCell;
+			sourceTree = "<group>";
+		};
+		D77A37412A260E62009CDFED /* PartOfSpeechCell */ = {
+			isa = PBXGroup;
+			children = (
+				D77A37422A260E7D009CDFED /* PartOfSpeechCell.swift */,
+				D77A37432A260E7D009CDFED /* PartOfSpeechCell.xib */,
+			);
+			path = PartOfSpeechCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -211,6 +249,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D77A37452A260E7D009CDFED /* PartOfSpeechCell.xib in Resources */,
 				D77A37322A22264D009CDFED /* WordDetailCell.xib in Resources */,
 				D77A37242A211C92009CDFED /* RecentWordCell.xib in Resources */,
 				D77A370F2A20BC6A009CDFED /* LaunchScreen.storyboard in Resources */,
@@ -228,6 +267,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D77A37232A211C92009CDFED /* RecentWordCell.swift in Sources */,
+				D77A37442A260E7D009CDFED /* PartOfSpeechCell.swift in Sources */,
 				D77A37042A20BC69009CDFED /* SearchVC.swift in Sources */,
 				D77A373C2A2352A9009CDFED /* SynonymCell.swift in Sources */,
 				D77A37292A216ABB009CDFED /* SearchViewModel.swift in Sources */,

@@ -21,6 +21,7 @@ class SearchVC: UIViewController, LoadingShowable {
         configureTableView()
         LoadingView.shared.configure()
         keyboardHiding()
+        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisplay), name:UIResponder.keyboardWillShowNotification , object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardHide), name:UIResponder.keyboardWillHideNotification , object: nil)
     }
@@ -56,14 +57,16 @@ class SearchVC: UIViewController, LoadingShowable {
     private func fetchWordData(for word: String) {
         viewModel.fetchWordDataAndSynonyms(word: word) { [weak self] result in
             switch result {
+                
             case .success(let wordElement):
                 DispatchQueue.main.async {
                     let wordDetailVC = self?.storyboard?.instantiateViewController(withIdentifier: "WordDetailVC") as! WordDetailVC
-                    wordDetailVC.wordElement = wordElement
-                    wordDetailVC.synonyms = self?.viewModel.synonyms ?? []
-                    //wordDetailVC.delegate = self
+                    wordDetailVC.viewModel.wordElement = wordElement
+                    wordDetailVC.viewModel.synonyms = self?.viewModel.synonyms ?? []
+                    wordDetailVC.viewModel.partOfSpeechSet = Set(self?.viewModel.meanings.compactMap({ $0.partOfSpeech }) ?? [])
                     self?.navigationController?.pushViewController(wordDetailVC, animated: true)
                }
+                
             case .failure(let error):
                 let alertController = UIAlertController(title: "Uyarı", message: "Sonuç bulunamadı.", preferredStyle: .alert)
                 let okAction = UIAlertAction(title: "Tamam", style: .default) { _ in

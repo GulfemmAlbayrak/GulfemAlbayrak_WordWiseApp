@@ -6,9 +6,7 @@
 //
 
 import UIKit
-import WordWiseAPI
 import AVFoundation
-
 
 class WordDetailVC: UIViewController, LoadingShowable {
     
@@ -17,23 +15,25 @@ class WordDetailVC: UIViewController, LoadingShowable {
     @IBOutlet weak var wordTableView: UITableView!
     @IBOutlet weak var synonymCollectionView: UICollectionView!
     @IBOutlet weak var speakerButton: UIButton!
+    @IBOutlet weak var partOfSpeechCollectionView: UICollectionView!
     
     var viewModel: WordDetailViewModel = WordDetailViewModel()
-    var wordElement: WordElement?
-    var synonyms: [SynWordElement] = []
     var player: AVAudioPlayer!
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         hideLoading()
-        if let word = wordElement?.word {
+        
+        if let word = viewModel.wordElement?.word {
             wordLbl.text = word.lowercased().capitalized
             configureTableView()
             configureCollectionView()
-            if let wordElement = wordElement {
-                configure(with: wordElement) // configure methodunu burada çağırıyoruz
+            
+            if let wordElement = viewModel.wordElement {
+                configure(with: viewModel)
             }
-            updateUI(with: wordElement!)
+            
+            updateUI(with: viewModel)
             toggleSpeakerButton()
         }
     }
@@ -46,30 +46,43 @@ class WordDetailVC: UIViewController, LoadingShowable {
     private func configureCollectionView() {
         synonymCollectionView.dataSource = self
         synonymCollectionView.register(UINib(nibName: "SynonymCell", bundle: nil), forCellWithReuseIdentifier: "SynonymCell")
+        partOfSpeechCollectionView.dataSource = self
+        partOfSpeechCollectionView.register(UINib(nibName: "PartOfSpeechCell", bundle: nil), forCellWithReuseIdentifier: "PartOfSpeechCell")
+
     }
     
-    private func configure(with wordElement: WordElement) {
-        phoneticLbl.text = wordElement.phonetics?.first?.text
-        viewModel.meanings = wordElement.meanings ?? []
-        viewModel.synonyms = synonyms
+    private func configure(with viewModel: WordDetailViewModel) {
+        phoneticLbl.text = viewModel.wordElement?.phonetics?.first?.text
+        viewModel.meanings = viewModel.wordElement?.meanings ?? []
         wordTableView.reloadData()
     }
 
         
-    private func updateUI(with wordElement: WordElement) {
-        phoneticLbl.text = wordElement.phonetics?.first?.text
+    private func updateUI(with viewModel: WordDetailViewModel) {
+        phoneticLbl.text = viewModel.wordElement?.phonetics?.first?.text
         wordTableView.reloadData()
         synonymCollectionView.reloadData()
     }
+    
     @IBAction func audioButton(_ sender: Any) {
-        guard let phonetics = wordElement?.phonetics, !phonetics.isEmpty,
-              let audioURLString = phonetics[0].audio, !audioURLString.isEmpty,
-              let audioURL = URL(string: audioURLString) else {
+        guard let phonetics = viewModel.wordElement?.phonetics, !phonetics.isEmpty else {
             return
         }
-        print("audioURLString: \(audioURLString)")
-        print("audioURL: \(audioURL)")
-        playAudioFromURL(audioURL)
+        
+        var audioURL: URL? = nil
+        
+        for phonetic in phonetics {
+            if let audioURLString = phonetic.audio, !audioURLString.isEmpty {
+                audioURL = URL(string: audioURLString)
+                break
+            }
+        }
+        
+        if let audioURL = audioURL {
+            print("audioURL: \(audioURL)")
+            playAudioFromURL(audioURL)
+        }
+        
     }
 
     private func playAudioFromURL(_ audioURL: URL) {
@@ -102,12 +115,21 @@ class WordDetailVC: UIViewController, LoadingShowable {
     }
     
     private func toggleSpeakerButton() {
-        if let phonetics = wordElement?.phonetics, !phonetics.isEmpty,
-           let audioURLString = phonetics[0].audio, !audioURLString.isEmpty {
-            speakerButton.isHidden = false
-        } else {
+        guard let phonetics = viewModel.wordElement?.phonetics else {
             speakerButton.isHidden = true
+            return
         }
+        
+        var hasAudio = false
+        
+        for phonetic in phonetics {
+            if let audioURLString = phonetic.audio, !audioURLString.isEmpty {
+                hasAudio = true
+                break
+            }
+        }
+        
+        speakerButton.isHidden = !hasAudio
     }
 
 }
@@ -127,14 +149,38 @@ extension WordDetailVC: UITableViewDataSource {
 
 extension WordDetailVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return min(5,viewModel.synonyms.count)
+        if collectionView == synonymCollectionView {
+            // SynonymCollectionView'deki hücre sayısını döndürün
+            return min(5, viewModel.synonyms.count)
+        } else if collectionView == partOfSpeechCollectionView {
+            // PartOfSpeechCollectionView'deki hücre sayısını döndürün
+            return viewModel.partOfSpeechSet.count
+        }
+        
+        return 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SynonymCell", for: indexPath) as! SynonymCell
-        let synonym = viewModel.synonyms[indexPath.item]
-        cell.configure(synonym: synonym)
-        return cell
+        if collectionView == synonymCollectionView {
+            // SynonymCollectionView için hücreyi oluşturun
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SynonymCell", for: indexPath) as! SynonymCell
+            let synonym = viewModel.synonyms[indexPath.item]
+            cell.configure(synonym: synonym)
+            return cell
+        } else if collectionView == partOfSpeechCollectionView {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PartOfSpeechCell", for: indexPath) as! PartOfSpeechCell
+            let partOfSpeechString = Array(viewModel.partOfSpeechSet)[indexPath.item]
+            
+            // partOfSpeechString ile eşleşen Meaning nesnesini bulun
+            if let meaning = viewModel.meanings.first(where: { $0.partOfSpeech == partOfSpeechString }) {
+                cell.configure(meaning: meaning)
+            }
+            return cell
+        }
+        
+        return UICollectionViewCell()
     }
-}
     
+}
+
+
