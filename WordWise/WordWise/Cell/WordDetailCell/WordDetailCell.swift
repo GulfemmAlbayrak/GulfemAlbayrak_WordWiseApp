@@ -15,6 +15,9 @@ class WordDetailCell: UITableViewCell {
     @IBOutlet weak var exampleTitle: UILabel!
     @IBOutlet weak var exampleLbl: UILabel!
     @IBOutlet weak var stackView: UIStackView!
+    
+    static let defaultHeight: CGFloat = 44.0
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -31,7 +34,27 @@ class WordDetailCell: UITableViewCell {
         exampleTitle.isHidden = meaning.definitions?.first?.example == nil
         exampleTitle.text = "Example"
         exampleLbl.text = meaning.definitions?.first?.example
-       
+        
+        deffinationLbl.numberOfLines = 0
+        exampleLbl.numberOfLines = 0
+        stackView.distribution = .fill
+        
+        deffinationLbl.invalidateIntrinsicContentSize()
+        exampleLbl.invalidateIntrinsicContentSize()
+        layoutIfNeeded()
     }
     
+    static func heightForCell(meaning: Meaning, width: CGFloat) -> CGFloat {
+        let cell = WordDetailCell(style: .default, reuseIdentifier: nil)
+        cell.contentView.frame.size.width = width // Güncelleme: contentView'in genişliği ayarlanıyor
+        cell.configure(meaning: meaning)
+        cell.layoutIfNeeded()
+
+        let targetSize = CGSize(width: width, height: UIView.layoutFittingCompressedSize.height)
+        let estimatedSize = cell.contentView.systemLayoutSizeFitting(targetSize,
+                                                                     withHorizontalFittingPriority: .required,
+                                                                     verticalFittingPriority: .fittingSizeLevel)
+
+        return max(estimatedSize.height, defaultHeight)
+    }
 }

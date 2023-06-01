@@ -7,50 +7,27 @@
 //
 import Foundation
 import WordWiseAPI
-import CoreData
 
-
- class SearchViewModel {
-     var words: [String] = []
-     var meanings: [Meaning] = []
-     var synonyms: [SynWordElement] = []
-
-     func addWord(_ word: String) {
-           if !words.contains(word) {
-               words.insert(word, at: 0)
-           }
+class SearchViewModel {
+    
+    var meanings: [Meaning] = []
+    var synonyms: [SynWordElement] = []
+    
+    private let wordService: WordServiceProtocol
+    private let synonymService: SynonymServiceProtocol
+    
+    init(wordService: WordServiceProtocol = WordService(), synonymService: SynonymServiceProtocol = SynonymService()) {
+        self.wordService = wordService
+        self.synonymService = synonymService
     }
-
-//     func addWordToCoreData(_ word: String) {
-//         if !words.contains(word) {
-//             words.insert(word, at: 0)
-//
-//             // Core Data'ya yeni bir Word kaydedin
-//             let newWord = Words(context: context)
-//             newWord.word = word
-//
-//             do {
-//                 // Değişiklikleri kaydedin
-//                 try context.save()
-//             } catch {
-//                 // Hata durumunda işlemleri yönetin
-//                 print("Core Data save error: \(error)")
-//             }
-//         }
-//     }
-     
-
+    
     func fetchWordDataAndSynonyms(word: String, completion: @escaping (Result<WordElement, Error>) -> Void) {
-        let wordService: WordServiceProtocol = WordService()
-        let synonymService: SynonymServiceProtocol = SynonymService()
-
         wordService.getWords(word: word) { [weak self] result in
             switch result {
             case .success(let wordElements):
                 if let wordElement = wordElements.first {
                     self?.meanings = wordElement.meanings ?? []
-
-                    synonymService.getSynonyms(word: word) { [weak self] result in
+                    self?.fetchSynonyms(for: word) { result in
                         switch result {
                         case .success(let synonyms):
                             self?.synonyms = synonyms
@@ -60,6 +37,17 @@ import CoreData
                         }
                     }
                 }
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    private func fetchSynonyms(for word: String, completion: @escaping (Result<[SynWordElement], Error>) -> Void) {
+        synonymService.getSynonyms(word: word) { result in
+            switch result {
+            case .success(let synonyms):
+                completion(.success(synonyms))
             case .failure(let error):
                 completion(.failure(error))
             }

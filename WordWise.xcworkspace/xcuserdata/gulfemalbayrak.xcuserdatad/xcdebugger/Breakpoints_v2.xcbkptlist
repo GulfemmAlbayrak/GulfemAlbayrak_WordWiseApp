@@ -14,8 +14,8 @@
             filePath = "WordWise/WordWise/Controllers/SearchVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "60"
-            endingLineNumber = "60"
+            startingLineNumber = "129"
+            endingLineNumber = "129"
             landmarkName = "fetchWordData(for:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -30,8 +30,8 @@
             filePath = "WordWise/WordWise/Controllers/WordDetailVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "50"
-            endingLineNumber = "50"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
             landmarkName = "configureCollectionView()"
             landmarkType = "7">
             <Locations>

@@ -37,9 +37,12 @@ class WordDetailVC: UIViewController, LoadingShowable {
         }
     }
   
+    //MARK: -Configure methods
+    
     private func configureTableView() {
         wordTableView.dataSource = self
         wordTableView.register(UINib(nibName: "WordDetailCell", bundle: nil), forCellReuseIdentifier: "WordDetailCell")
+        wordTableView.reloadData()
     }
     
     private func configureCollectionView() {
@@ -66,7 +69,8 @@ class WordDetailVC: UIViewController, LoadingShowable {
     
     private func configure(with viewModel: WordDetailViewModel) {
         guard let phonetics = viewModel.wordElement?.phonetics, !phonetics.isEmpty else {
-            return
+            phoneticLbl.text = ""
+            return  viewModel.meanings = viewModel.wordElement?.meanings ?? []
         }
 
         var validPhoneticText: String? = nil
@@ -74,6 +78,7 @@ class WordDetailVC: UIViewController, LoadingShowable {
         for phonetic in phonetics {
             if let text = phonetic.text, !text.isEmpty {
                 validPhoneticText = text
+                viewModel.meanings = viewModel.wordElement?.meanings ?? []
                 break
             }
         }
@@ -83,12 +88,11 @@ class WordDetailVC: UIViewController, LoadingShowable {
         } else {
             phoneticLbl.text = "N/A"
         }
-
-
         viewModel.meanings = viewModel.wordElement?.meanings ?? []
-        wordTableView.reloadData()
+
     }
 
+    //MARK: -Audio
     
     @IBAction func audioButton(_ sender: Any) {
         guard let phonetics = viewModel.wordElement?.phonetics, !phonetics.isEmpty else {
@@ -139,6 +143,8 @@ class WordDetailVC: UIViewController, LoadingShowable {
         
         task.resume()
     }
+    
+    //MARK: -Speaker Button
     
     private func toggleSpeakerButton() {
         guard let phonetics = viewModel.wordElement?.phonetics else {
