@@ -14,6 +14,7 @@ class WordDetailCell: UITableViewCell {
     @IBOutlet weak var deffinationLbl: UILabel!
     @IBOutlet weak var exampleTitle: UILabel!
     @IBOutlet weak var exampleLbl: UILabel!
+    @IBOutlet weak var stackView: UIStackView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -30,6 +31,7 @@ class WordDetailCell: UITableViewCell {
         exampleTitle.isHidden = meaning.definitions?.first?.example == nil
         exampleTitle.text = "Example"
         exampleLbl.text = meaning.definitions?.first?.example
+       
     }
     
 }

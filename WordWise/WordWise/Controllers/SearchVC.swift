@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 class SearchVC: UIViewController, LoadingShowable {
     
@@ -24,6 +25,8 @@ class SearchVC: UIViewController, LoadingShowable {
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisplay), name:UIResponder.keyboardWillShowNotification , object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardHide), name:UIResponder.keyboardWillHideNotification , object: nil)
+        
+
     }
     
     @objc func keyboardWillDisplay(notification: Notification) {
@@ -61,6 +64,19 @@ class SearchVC: UIViewController, LoadingShowable {
             case .success(let wordElement):
                 DispatchQueue.main.async {
                     let wordDetailVC = self?.storyboard?.instantiateViewController(withIdentifier: "WordDetailVC") as! WordDetailVC
+                    
+                    if let phonetic = wordElement.phonetic {
+                        wordDetailVC.viewModel.phonetic = phonetic
+                    } else if let firstNonEmptyPhonetic = wordElement.phonetics?.first(where: { $0.text != nil && !$0.text!.isEmpty }) {
+                        if let phoneticText = firstNonEmptyPhonetic.text {
+                            wordDetailVC.viewModel.phonetic = phoneticText
+                        } else {
+                            wordDetailVC.viewModel.phonetic = "N/A"
+                        }
+                    } else {
+                        wordDetailVC.viewModel.phonetic = "N/A"
+                    }
+                    
                     wordDetailVC.viewModel.wordElement = wordElement
                     wordDetailVC.viewModel.synonyms = self?.viewModel.synonyms ?? []
                     wordDetailVC.viewModel.partOfSpeechSet = Set(self?.viewModel.meanings.compactMap({ $0.partOfSpeech }) ?? [])
@@ -82,6 +98,7 @@ class SearchVC: UIViewController, LoadingShowable {
     
     @IBAction func searchButtonTapped(_ sender: Any) {
         guard let searchText = searchBar.text else { return }
+        
         viewModel.addWord(searchText)
         tableView.reloadData()
         searchBar.text = ""

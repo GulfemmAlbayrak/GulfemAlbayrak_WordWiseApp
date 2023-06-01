@@ -14,5 +14,6 @@ class WordDetailViewModel {
     var synonyms: [SynWordElement] = []
     var wordElement: WordElement?
     var partOfSpeechSet: Set<String> = Set<String>()
+    var phonetic: String?
     
 }

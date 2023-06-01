@@ -14,10 +14,58 @@
             filePath = "WordWise/WordWise/Controllers/SearchVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "57"
-            endingLineNumber = "57"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
             landmarkName = "fetchWordData(for:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "54A034C1-64DA-4540-9DAA-2D50C018C2B3"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WordWise/WordWise/Controllers/WordDetailVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "50"
+            endingLineNumber = "50"
+            landmarkName = "configureCollectionView()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "54A034C1-64DA-4540-9DAA-2D50C018C2B3 - ac2a1df97a537e9c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WordWise.WordDetailVC.configureCollectionView() -&gt; ()"
+                  moduleName = "WordWise"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/gulfemalbayrak/Desktop/GulfemAlbayrak_HW3/WordWise/WordWise/Controllers/WordDetailVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "51"
+                  endingLineNumber = "51"
+                  offsetFromSymbolStart = "1140">
+               </Location>
+               <Location
+                  uuid = "54A034C1-64DA-4540-9DAA-2D50C018C2B3 - ac2a1df97a537e9c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WordWise.WordDetailVC.configureCollectionView() -&gt; ()"
+                  moduleName = "WordWise"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/gulfemalbayrak/Desktop/GulfemAlbayrak_HW3/WordWise/WordWise/Controllers/WordDetailVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "51"
+                  endingLineNumber = "51"
+                  offsetFromSymbolStart = "1448">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

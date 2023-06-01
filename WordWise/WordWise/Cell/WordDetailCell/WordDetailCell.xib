@@ -18,12 +18,12 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M5H-MW-wLI">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="115.33333333333333"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="150"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleAspectFit" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="LYt-04-VFa">
-                                <rect key="frame" x="8" y="0.0" width="377" height="115.33333333333333"/>
+                            <stackView opaque="NO" contentMode="scaleAspectFill" axis="vertical" distribution="fillProportionally" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="LYt-04-VFa">
+                                <rect key="frame" x="8" y="0.0" width="377" height="150"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jvb-Q5-81N">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="justified" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="346" translatesAutoresizingMaskIntoConstraints="NO" id="jvb-Q5-81N">
                                         <rect key="frame" x="16" y="0.0" width="345" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="aOz-SI-P5q"/>
@@ -32,7 +32,7 @@
                                         <color key="textColor" systemColor="linkColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qx1-iV-6P7">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="justified" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qx1-iV-6P7">
                                         <rect key="frame" x="16" y="32" width="345" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="YVA-Gx-d32"/>
@@ -41,7 +41,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vPi-8N-YJ4">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="justified" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vPi-8N-YJ4">
                                         <rect key="frame" x="16" y="64" width="345" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="Jhi-89-9kO"/>
@@ -50,8 +50,8 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3OV-Rd-6Bw">
-                                        <rect key="frame" x="16" y="96" width="345" height="19.333333333333329"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="justified" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3OV-Rd-6Bw">
+                                        <rect key="frame" x="16" y="96" width="345" height="54"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="dNK-Tg-rO5"/>
                                         </constraints>
@@ -89,6 +89,7 @@
                 <outlet property="exampleLbl" destination="3OV-Rd-6Bw" id="NTF-m7-hYE"/>
                 <outlet property="exampleTitle" destination="vPi-8N-YJ4" id="Jae-TS-OG4"/>
                 <outlet property="partOfSpeechLbl" destination="jvb-Q5-81N" id="w4s-cv-1kd"/>
+                <outlet property="stackView" destination="LYt-04-VFa" id="F8o-2q-jPV"/>
             </connections>
             <point key="canvasLocation" x="-45.038167938931295" y="-10.211267605633804"/>
         </tableViewCell>

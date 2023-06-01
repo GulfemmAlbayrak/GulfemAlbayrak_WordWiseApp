@@ -40,7 +40,6 @@ public class WordService: WordServiceProtocol {
     }
 }
 
-
 public class SynonymService: SynonymServiceProtocol {
 
     public init() { }

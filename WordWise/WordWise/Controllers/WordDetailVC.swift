@@ -16,6 +16,7 @@ class WordDetailVC: UIViewController, LoadingShowable {
     @IBOutlet weak var synonymCollectionView: UICollectionView!
     @IBOutlet weak var speakerButton: UIButton!
     @IBOutlet weak var partOfSpeechCollectionView: UICollectionView!
+    @IBOutlet weak var synonymsTitle: UILabel!
     
     var viewModel: WordDetailViewModel = WordDetailViewModel()
     var player: AVAudioPlayer!
@@ -29,11 +30,9 @@ class WordDetailVC: UIViewController, LoadingShowable {
             configureTableView()
             configureCollectionView()
             
-            if let wordElement = viewModel.wordElement {
+            if viewModel.wordElement != nil {
                 configure(with: viewModel)
             }
-            
-            updateUI(with: viewModel)
             toggleSpeakerButton()
         }
     }
@@ -48,21 +47,48 @@ class WordDetailVC: UIViewController, LoadingShowable {
         synonymCollectionView.register(UINib(nibName: "SynonymCell", bundle: nil), forCellWithReuseIdentifier: "SynonymCell")
         partOfSpeechCollectionView.dataSource = self
         partOfSpeechCollectionView.register(UINib(nibName: "PartOfSpeechCell", bundle: nil), forCellWithReuseIdentifier: "PartOfSpeechCell")
-
+        
+        if let flowLayout = partOfSpeechCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            flowLayout.scrollDirection = .horizontal
+            flowLayout.minimumInteritemSpacing = 10
+            flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 20)
+            partOfSpeechCollectionView.reloadData()
+        }
+        
+        if viewModel.synonyms.count == 0 {
+            synonymCollectionView.isHidden = true
+            synonymsTitle.isHidden = true
+        } else {
+            synonymCollectionView.isHidden = false
+            synonymsTitle.isHidden = false
+        }
     }
     
     private func configure(with viewModel: WordDetailViewModel) {
-        phoneticLbl.text = viewModel.wordElement?.phonetics?.first?.text
+        guard let phonetics = viewModel.wordElement?.phonetics, !phonetics.isEmpty else {
+            return
+        }
+
+        var validPhoneticText: String? = nil
+
+        for phonetic in phonetics {
+            if let text = phonetic.text, !text.isEmpty {
+                validPhoneticText = text
+                break
+            }
+        }
+
+        if let validText = validPhoneticText {
+            phoneticLbl.text = validText
+        } else {
+            phoneticLbl.text = "N/A"
+        }
+
+
         viewModel.meanings = viewModel.wordElement?.meanings ?? []
         wordTableView.reloadData()
     }
 
-        
-    private func updateUI(with viewModel: WordDetailViewModel) {
-        phoneticLbl.text = viewModel.wordElement?.phonetics?.first?.text
-        wordTableView.reloadData()
-        synonymCollectionView.reloadData()
-    }
     
     @IBAction func audioButton(_ sender: Any) {
         guard let phonetics = viewModel.wordElement?.phonetics, !phonetics.isEmpty else {
@@ -147,13 +173,11 @@ extension WordDetailVC: UITableViewDataSource {
     }
 }
 
-extension WordDetailVC: UICollectionViewDataSource {
+extension WordDetailVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == synonymCollectionView {
-            // SynonymCollectionView'deki hücre sayısını döndürün
             return min(5, viewModel.synonyms.count)
         } else if collectionView == partOfSpeechCollectionView {
-            // PartOfSpeechCollectionView'deki hücre sayısını döndürün
             return viewModel.partOfSpeechSet.count
         }
         
@@ -162,7 +186,6 @@ extension WordDetailVC: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == synonymCollectionView {
-            // SynonymCollectionView için hücreyi oluşturun
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SynonymCell", for: indexPath) as! SynonymCell
             let synonym = viewModel.synonyms[indexPath.item]
             cell.configure(synonym: synonym)
@@ -170,16 +193,27 @@ extension WordDetailVC: UICollectionViewDataSource {
         } else if collectionView == partOfSpeechCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PartOfSpeechCell", for: indexPath) as! PartOfSpeechCell
             let partOfSpeechString = Array(viewModel.partOfSpeechSet)[indexPath.item]
-            
-            // partOfSpeechString ile eşleşen Meaning nesnesini bulun
+            cell.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
             if let meaning = viewModel.meanings.first(where: { $0.partOfSpeech == partOfSpeechString }) {
                 cell.configure(meaning: meaning)
             }
+            
             return cell
         }
         
         return UICollectionViewCell()
     }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        if collectionView == partOfSpeechCollectionView {
+            let availableWidth = collectionView.bounds.width - collectionView.contentInset.left - collectionView.contentInset.right
+            let sideInset = max((availableWidth ) / 2, 0)
+            return UIEdgeInsets(top: 0, left: sideInset, bottom: 0, right: sideInset)
+        }
+        
+        return UIEdgeInsets.zero
+    }
+
     
 }
 
