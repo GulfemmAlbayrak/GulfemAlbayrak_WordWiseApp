@@ -1,6 +1,6 @@
 # WordWise App
 
-### WordWise is a dictionary application that allows users to search for word definitions and related information. It utilizes the [dictionaryapi](https://www.dictionaryapi.com/) to retrieve word data. The application features a modular design, providing an intuitive user interface. latest news and presents it to users through a user-friendly interface.
+### WordWise is a dictionary application that allows users to search for word definitions and related information. It utilizes the [dictionaryapi](https://dictionaryapi.dev/) to retrieve word data. The application features a modular design, providing an intuitive user interface. latest news and presents it to users through a user-friendly interface.
 
 ## Features
 - **Search Bar:** Users can enter a word in the search bar to retrieve its detailed information.
