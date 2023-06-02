@@ -219,8 +219,6 @@ extension WordDetailVC: UICollectionViewDataSource, UICollectionViewDelegateFlow
         
         return UIEdgeInsets.zero
     }
-
-    
 }
 
 
