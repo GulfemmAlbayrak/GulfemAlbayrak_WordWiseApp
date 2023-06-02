@@ -168,7 +168,7 @@ class SearchVC: UIViewController, LoadingShowable {
     //MARK: -SearchButton Action
     
     @IBAction func searchButtonTapped(_ sender: Any) {
-        guard let searchText = searchBar.text else { return }
+        guard let searchText = searchBar.text, !searchText.isEmpty, !searchText.trimmingCharacters(in: .whitespaces).isEmpty else { return }
         
         addWord(searchText)
         tableView.reloadData()
