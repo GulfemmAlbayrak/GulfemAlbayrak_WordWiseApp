@@ -22,9 +22,10 @@
 | ---------------------------- | -------------------------- | 
 | <img src="https://github.com/GulfemmAlbayrak/GulfemAlbayrak_HW3/assets/101430350/4b292aa6-cc52-4f96-bd4e-73ccf8cd408b" width="300px"> | <img src="https://github.com/GulfemmAlbayrak/GulfemAlbayrak_HW3/assets/101430350/341fe5e9-ea0f-48d5-a421-26791ea6f65a" width="300px"> |
 
-
+## Video
 
 |                              |                              |         
 | ---------------------------- | ---------------------------- |
-| ![FirstPart](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMzU1YTEzNzUyODcyMzc0YjlkZDZiYzU2MGMwYjVmZmQ4NzcwZTA1NyZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/3UAD2wmpTRSCuwNb7L/giphy.gif) | ![SecondPart](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMDUzNjkzNTQ5OGY3MTNkZmJhOWE3MTYzNTE5Zjc0NmQ5NTY4MTgzMCZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/ogr7DRHGuXcPakR5EB/giphy.gif) |
+| <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMzU1YTEzNzUyODcyMzc0YjlkZDZiYzU2MGMwYjVmZmQ4NzcwZTA1NyZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/3UAD2wmpTRSCuwNb7L/giphy.gif" width="300px"> | <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMDUzNjkzNTQ5OGY3MTNkZmJhOWE3MTYzNTE5Zjc0NmQ5NTY4MTgzMCZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/ogr7DRHGuXcPakR5EB/giphy.gif" width="300px">
+ |
 
