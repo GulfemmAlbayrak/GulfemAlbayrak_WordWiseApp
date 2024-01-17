@@ -13,6 +13,7 @@
  
 ## Dependencies
 - Alamofire: A networking library used for making API requests.
+- AVAudioPlayer: Used for play the pronunciation.
 - Core Data: Enables data persistence for saving recent words.
 
  ## Media
