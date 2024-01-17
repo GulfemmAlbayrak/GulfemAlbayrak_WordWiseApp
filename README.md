@@ -13,7 +13,6 @@
  
 ## Dependencies
 - Alamofire: A networking library used for making API requests.
-- AVAudioPlayer: Used for downloading and caching images. It provides an easy way to load and display images from URLs obtained from the New York Times API.
 - Core Data: Enables data persistence for saving recent words.
 
  ## Media
