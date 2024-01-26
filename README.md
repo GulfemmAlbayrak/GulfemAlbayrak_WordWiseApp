@@ -20,7 +20,7 @@
 
 | SearchVC                     | WordDetailVC               | 
 | ---------------------------- | -------------------------- | 
-| <img src="https://github.com/GulfemmAlbayrak/GulfemAlbayrak_HW3/assets/101430350/4b292aa6-cc52-4f96-bd4e-73ccf8cd408b" width="300px"> | <img src="https://github.com/GulfemmAlbayrak/GulfemAlbayrak_HW3/assets/101430350/341fe5e9-ea0f-48d5-a421-26791ea6f65a" width="300px"> |
+| <img src="https://github.com/GulfemmAlbayrak/GulfemAlbayrak_WordWiseApp/assets/101430350/4b292aa6-cc52-4f96-bd4e-73ccf8cd408b" width="300px"> | <img src="https://github.com/GulfemmAlbayrak/GulfemAlbayrak_WordWiseApp/assets/101430350/341fe5e9-ea0f-48d5-a421-26791ea6f65a" width="300px"> |
 
 ## Video
 
